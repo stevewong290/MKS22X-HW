@@ -24,11 +24,13 @@ public class Recursion {
 	    return guess;
 	}
 	return tracker(n, (n / guess + guess) / 2);}
-    
+    /*    
     public static void main(String[] args) {
 	System.out.println(sqrt(81));
+	System.out.println(sqrt(2));
+	System.out.println(name());
     }
-    
+    */
 
     
 }
