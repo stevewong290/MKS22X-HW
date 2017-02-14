@@ -2,7 +2,6 @@
 public class QueenBoard {
     private int[][]board;
     private int solutionCount;
-    private int posnum;
     //construct the Board
     public QueenBoard(int size) {
 	board = new int[size][size];
@@ -12,7 +11,7 @@ public class QueenBoard {
     }
     //solves the function and returns true if there is a possible solutions. It returns false if there is no solution. 
     private boolean solveH(int col) {
-        if (col >  board.length) {
+        if (col >=  board.length) {
 	    return true;
 	}
 	else {
@@ -26,7 +25,6 @@ public class QueenBoard {
 			removeQueen(col, x);
 		    }
 		}
-		System.out.println(this);
 	    }
 	    return false;
 			
@@ -83,10 +81,27 @@ public class QueenBoard {
     
     //returns the number of solutions: this function does not account for unique solutions
     public int getSolutionCount() {
-	return -1;
+	return solutionCount;
     }
-    public int solutionCountHelper() {
-	return -1;
+    public void solutionCountHelper(int col) {
+        if (col >=  board.length) {
+	    solutionCount = solutionCount + 1;
+	}
+	else {
+	    for(int x = 0; x < board.length; x++) {
+		if (board[x][col] == 0) {
+		    addQueen(col, x);
+		    if (solveH(col + 1)) {
+			removeQueen(col, x);
+		    }
+		    else {
+			removeQueen(col, x);
+		    }
+		}
+	    }
+			
+	}
+
     }
     //gives you the 2-D array of the Board. If the solve has not been run, it should return a board of all zeroes. 
     public String toString() {
@@ -100,13 +115,15 @@ public class QueenBoard {
 	return qboard;
     }
     public static void main(String args[]) {
-	QueenBoard a = new QueenBoard(4);
-	System.out.println(a.toString());
+	QueenBoard a = new QueenBoard(8);
 	/*    	System.out.println(a.addQueen(0,2));
 	System.out.println(a.toString());
 	System.out.println(a.removeQueen(2,2));
 	System.out.println(a.toString());*/
-		System.out.println(a.solve());
+	//	System.out.println(a.solve());
+	//	System.out.println(a);
+	a.solutionCountHelper(0);
+	System.out.println(a.getSolutionCount());
 	/*
 	  System.out.println(queenboard.solve());
 	  System.out.println(queenboard.getSolutionCount());
