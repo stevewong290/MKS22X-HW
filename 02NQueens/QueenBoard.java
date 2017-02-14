@@ -12,7 +12,24 @@ public class QueenBoard {
     }
     //solves the function and returns true if there is a possible solutions. It returns false if there is no solution. 
     private boolean solveH(int col) {
-        if (col == board.length) {
+        if (col >  board.length) {
+	    return true;
+	}
+	else {
+	    for(int x = 0; x < board.length; x++) {
+		if (board[x][col] == 0) {
+		    addQueen(x,col);
+		    if (solveH(col + 1)) {
+			return true;
+		    }
+		    else {
+			removeQueen(x, col);
+		    }
+		    System.out.println(this);
+		}
+	    }
+	    return false;
+			
 	}
     }
     
@@ -93,12 +110,13 @@ public class QueenBoard {
 	return qboard;
     }
     public static void main(String args[]) {
-	QueenBoard a = new QueenBoard(8);
+	QueenBoard a = new QueenBoard(4);
 	System.out.println(a.toString());
 	System.out.println(a.addQueen(2,2));
 	System.out.println(a.toString());
-	System.out.println(a.removeQueen(1,2));
+	System.out.println(a.removeQueen(2,2));
 	System.out.println(a.toString());
+	System.out.println(a.solve());
 	/*
 	  System.out.println(queenboard.solve());
 	  System.out.println(queenboard.getSolutionCount());
