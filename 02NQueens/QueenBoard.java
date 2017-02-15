@@ -7,18 +7,24 @@ public class QueenBoard {
 	board = new int[size][size];
     }
     public boolean solve() {
-	return solveH(0);
+	return solveH(0, true);
     }
     //solves the function and returns true if there is a possible solutions. It returns false if there is no solution. 
-    private boolean solveH(int col) {
+    private boolean solveH(int col, boolean stop) {
         if (col >=  board.length) {
-	    return true;
+	    if (stop) {
+		return true;
+	    }
+	    else {
+		solutionCount++;
+		return false;
+	    }
 	}
 	else {
 	    for(int x = 0; x < board.length; x++) {
 		if (board[x][col] == 0) {
 		    addQueen(col, x);
-		    if (solveH(col + 1)) {
+		    if (solveH(col + 1,stop)) {
 			return true;
 		    }
 		    else {
@@ -83,24 +89,9 @@ public class QueenBoard {
     public int getSolutionCount() {
 	return solutionCount;
     }
-    public void solutionCountHelper(int col) {
-        if (col >=  board.length) {
-	    solutionCount = solutionCount + 1;
-	}
-	else {
-	    for(int x = 0; x < board.length; x++) {
-		if (board[x][col] == 0) {
-		    addQueen(col, x);
-		    if (solveH(col + 1)) {
-			removeQueen(col, x);
-		    }
-		    else {
-			removeQueen(col, x);
-		    }
-		}
-	    }
-			
-	}
+    public void solutionCountHelper() {
+	solutionCount = 0;
+        solveH(0, false);
 
     }
     //gives you the 2-D array of the Board. If the solve has not been run, it should return a board of all zeroes. 
@@ -122,7 +113,8 @@ public class QueenBoard {
 	System.out.println(a.toString());*/
 	//	System.out.println(a.solve());
 	//	System.out.println(a);
-	a.solutionCountHelper(0);
+	System.out.println(a);
+	a.solutionCountHelper();
 	System.out.println(a.getSolutionCount());
 	/*
 	  System.out.println(queenboard.solve());
