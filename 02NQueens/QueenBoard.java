@@ -99,7 +99,12 @@ public class QueenBoard {
 	String qboard = "";
 	for (int r = 0; r < board.length; r++) {
 	    for(int c = 0; c < board.length; c++) {
-		qboard = qboard + " " +  board[r][c];
+		if (board[r][c] != -1) {
+		    qboard = qboard + " " +  "_";
+		}
+		else {
+		    qboard= qboard + " " + "Q";
+		}
 	    }
 	    qboard += "\n";
 	}
@@ -111,11 +116,11 @@ public class QueenBoard {
 	System.out.println(a.toString());
 	System.out.println(a.removeQueen(2,2));
 	System.out.println(a.toString());*/
-	//	System.out.println(a.solve());
-	//	System.out.println(a);
-	System.out.println(a);
-	a.solutionCountHelper();
-	System.out.println(a.getSolutionCount());
+       	System.out.println(a.solve());
+      	System.out.println(a);
+	QueenBoard b = new QueenBoard(12);
+	b.solutionCountHelper();
+	System.out.println(b.getSolutionCount());
 	/*
 	  System.out.println(queenboard.solve());
 	  System.out.println(queenboard.getSolutionCount());
