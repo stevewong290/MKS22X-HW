@@ -29,7 +29,15 @@ public class KnightBoard{
     }
 
     private boolean solveH(int row ,int col, int level) {
-	return true;
+	if (level == (board.length * board[0].length)) {
+	    return true;
+	}
+	if (isGoodSpot(row, col))
+	/*	for (int r = 0; r < board.length; r++) {
+	    for(int c = 0; c < board[0].length; c++) {
+		if (isGoodSpot(row, col) == true &&
+		    (row == 
+	*/
     }
     public boolean isGoodSpot(int row, int col) {
 	if (row < board.length   &&
