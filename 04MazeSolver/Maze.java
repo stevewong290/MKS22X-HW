@@ -21,7 +21,7 @@ public class Maze{
     */
 
     public Maze(String filename){
-        //COMPLETE CONSTRUCTOR
+        maze = new char[][];
     }
 
     public void setAnimate(boolean b){
