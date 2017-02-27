@@ -32,12 +32,40 @@ public class KnightBoard{
 	if (level == (board.length * board[0].length)) {
 	    return true;
 	}
-	if (isGoodSpot(row, col))
-	/*	for (int r = 0; r < board.length; r++) {
-	    for(int c = 0; c < board[0].length; c++) {
-		if (isGoodSpot(row, col) == true &&
-		    (row == 
-	*/
+	if (isGoodSpot(row, col)) {
+	    board[row][col] = level;
+	    if(solveH(row + 2, col + 1, level+1)) {
+		return true;
+	    }
+	    if(solveH(row + 2, col - 1, level+1)) {
+		return true;
+	    }
+	    if(solveH(row - 2, col + 1, level+1)) {
+		return true;
+	    }
+	    if(solveH(row - 2, col - 1, level+1)) {
+		return true;
+	    }
+	    if(solveH(row + 1, col + 2, level+1)) {
+		return true;
+	    }
+	    if(solveH(row + 1, col - 2, level+1)) {
+		return true;
+	    }
+	    if(solveH(row - 1, col + 2, level+1)) {
+		return true;
+	    }
+	    if(solveH(row - 1, col - 2, level+1)) {
+		return true;
+	    }
+	    else {
+		return false;
+	    }
+	    
+	}
+        else {
+	    return false;
+	}
     }
     public boolean isGoodSpot(int row, int col) {
 	if (row < board.length   &&
@@ -58,6 +86,8 @@ public class KnightBoard{
 	System.out.println(a.isGoodSpot(0,0));
 	System.out.println(a.isGoodSpot(8,8));
 	System.out.println(a.isGoodSpot(7,8));
+	a.solve();
+	System.out.println(a);
     }
 
 
