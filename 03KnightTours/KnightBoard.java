@@ -8,8 +8,12 @@ public class KnightBoard{
 	String kboard = "";
 	for (int r = 0; r < board.length; r++) {
 	    for(int c = 0; c < board[0].length; c++) {
-		kboard = kboard + " " + board[r][c];
-		/*
+		if (board[r][c] < 10) {
+		    kboard = kboard + "  " + board[r][c];
+		}
+		else {
+		    kboard = kboard + " " + board[r][c];
+		}/*
 		if (board[r][c] != -1) {
 		    kboard = kboard + " " +  0;
 		}
@@ -29,7 +33,7 @@ public class KnightBoard{
     }
 
     private boolean solveH(int row ,int col, int level) {
-	if (level == (board.length * board[0].length)) {
+	if (level == (board.length * board[0].length) + 1) {
 	    return true;
 	}
 	if (isGoodSpot(row, col)) {
@@ -59,6 +63,7 @@ public class KnightBoard{
 		return true;
 	    }
 	    else {
+		board[row][col] = 0;
 		return false;
 	    }
 	    
@@ -81,11 +86,12 @@ public class KnightBoard{
 
     }
     public static void main(String args[]){
-	KnightBoard a = new KnightBoard(8,8);
+	KnightBoard a = new KnightBoard(7,7);
 	System.out.println(a);
-	System.out.println(a.isGoodSpot(0,0));
+	/*	System.out.println(a.isGoodSpot(0,0));
 	System.out.println(a.isGoodSpot(8,8));
 	System.out.println(a.isGoodSpot(7,8));
+	*/
 	a.solve();
 	System.out.println(a);
     }
