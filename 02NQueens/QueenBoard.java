@@ -2,8 +2,10 @@
 public class QueenBoard {
     private int[][]board;
     private int solutionCount;
+    private boolean ran;
     //construct the Board
     public QueenBoard(int size) {
+	ran = false;
 	board = new int[size][size];
     }
     public boolean solve() {
@@ -11,6 +13,7 @@ public class QueenBoard {
     }
     //solves the function and returns true if there is a possible solutions. It returns false if there is no solution. 
     private boolean solveH(int col, boolean stop) {
+	ran = true;
         if (col >=  board.length) {
 	    if (stop) {
 		return true;
@@ -87,9 +90,14 @@ public class QueenBoard {
     
     //returns the number of solutions: this function does not account for unique solutions
     public int getSolutionCount() {
-	return solutionCount;
+	if (ran == true) {
+	    return solutionCount;
+	}
+	else {
+	    return -1;
+	}
     }
-    public void solutionCountHelper() {
+    public void countSolutions() {
 	solutionCount = 0;
         solveH(0, false);
 
@@ -118,8 +126,10 @@ public class QueenBoard {
 	System.out.println(a.toString());*/
        	System.out.println(a.solve());
       	System.out.println(a);
-	QueenBoard b = new QueenBoard(12);
-	b.solutionCountHelper();
+	QueenBoard b = new QueenBoard(15);
+	b.countSolutions();
+	b.solve();
+	System.out.println(b);
 	System.out.println(b.getSolutionCount());
 	/*
 	  System.out.println(queenboard.solve());
