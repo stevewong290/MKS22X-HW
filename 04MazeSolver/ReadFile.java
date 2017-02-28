@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class ReadFile {
   public static void main(String args[]) throws FileNotFoundException {
         //instead of a try/catch, you can throw the FileNotFoundException.
-        File infile = new File("input.txt");// can be a path"/full/path/to/file.txt" 
+        File infile = new File("data1.dat");// can be a path"/full/path/to/file.txt" 
         Scanner inf = new Scanner(text);
         int lineNumber = 1;
         while(inf.hasNextLine()){
