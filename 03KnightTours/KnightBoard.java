@@ -86,14 +86,14 @@ public class KnightBoard{
 
     }
     public static void main(String args[]){
-	KnightBoard a = new KnightBoard(7,7);
+	KnightBoard a = new KnightBoard(8,8);
 	System.out.println(a);
 	/*	System.out.println(a.isGoodSpot(0,0));
 	System.out.println(a.isGoodSpot(8,8));
 	System.out.println(a.isGoodSpot(7,8));
 	*/
 	a.solve();
-	System.out.println(a);
+	//	System.out.println(a);
     }
 
 
