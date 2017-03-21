@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.*;
 
 public class Quick{
     
@@ -7,27 +7,38 @@ public class Quick{
 
     public static int part(int[] data, int start, int end){
 	Random rand = new Random();
-	int pivotindex = rand.nextInt(end - start + 1) + start;
+	int pivotpoint = rand.nextInt(end - start + 1) + start;
 	int[] temp = new int[end - start + 1];
 	int begpos = 0;
-	int endpos = 0;
+	int endpos = end - start;
+	int endret = 0;
 	for(int x = start; x < end + 1; x++){
-	    if (data[x] < data[pivotindex]){
+	    if (begpos > endpos){
+		temp[begpos] = data[pivotpoint];
+		endret = begpos; 
+	    }
+	    if (data[x] < data[pivotpoint]){
 		temp[begpos] = data[x];
 		begpos++;
 	    }
-	    if (data[x] > data[pivotindex]){
+	    if (data[x] > data[pivotpoint]){
 		temp[endpos] = data[x];
 		endpos--;
 	    }
-	    if (x != pivotindex && data[x] = data[pivotindex]) {
+	    if (x != pivotpoint && data[x] == data[pivotpoint]) {
 		temp[begpos] = data[x];
+		begpos++;
 	    }
-	    if (begpos == endpos){
-		temp[begpos] = data[pivotindex];
-	    }
+	    // if ()
+	    /*  if (begpos == endpos){
+		temp[begpos] = data[pivotpoint];
+		begpos = endret;
+		}*/
 	}
-	for (
+	for (int x = start; x < end + 1; x++){
+	    data[x] = temp[x - start];
+	}
+	return endret;
     }
 
     public static int quickselect(int []data, int k){
@@ -36,10 +47,17 @@ public class Quick{
 	return 1;
     }
 
+    /* public String toString() {
+    
+    }
+    */
 
     public static void main(String args[]){
-	int[]ary = { 2, 10, 15, 23, 0,  5};
-	System.out.println(part(ary, 1, 3));
+	//	int[]ary = { 2, 10, 15, 23, 0,  5};
+	int[]ary = {0,1,2,3};
+	System.out.println(part(ary, 0, 3));
+	System.out.println(Arrays.toString(ary));
+	
 	/*	quickselect( ary , 0 );
 	quickselect( ary , 1 ); 
 	quickselect( ary , 2 );  
