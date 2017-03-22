@@ -4,14 +4,35 @@ public class Quick{
     
 
 
-
+    /*
     public static int part(int[] data, int start, int end){
 	Random rand = new Random();
 	int pivotpoint = rand.nextInt(end - start + 1) + start;
-	int[] temp = new int[end - start + 1];
+	//	int[] temp = new int[end - start + 1];
 	int begpos = 0;
 	int endpos = end - start;
 	int endret = 0;
+      	int fastplsyea;
+	}*/
+
+    public static void quicksort(int[] data){
+	quicksortH(data, );
+    }
+
+    public static void quicksortH(int[] data1, int low, int high){
+	Random rand = new Random();
+	int pivotpoint = rand.nextInt(data1.length - 1);
+	
+
+    }
+    
+    public static void swap(int[] array, int i, int j){
+	int swappervalue;
+	swappervalue = array[i];
+	array[i] = array[j];
+	array[j] = swappervalue;
+    }
+	/*
 	for(int x = start; x < end + 1; x++){
 	    if (begpos > endpos){
 		temp[begpos] = data[pivotpoint];
@@ -34,12 +55,13 @@ public class Quick{
 		temp[begpos] = data[pivotpoint];
 		begpos = endret;
 		}*/
-	}
+    /*	}
 	for (int x = start; x < end + 1; x++){
 	    data[x] = temp[x - start];
 	}
 	return endret;
-    }
+*/
+    
 
     public static int quickselect(int []data, int k){
 	//return the value that is the kth smallest value of the array. 
@@ -53,11 +75,14 @@ public class Quick{
     */
 
     public static void main(String args[]){
+	
 	//	int[]ary = { 2, 10, 15, 23, 0,  5};
 	int[]ary = {0,1,2,3};
-	System.out.println(part(ary, 0, 3));
+	//	swap(ary, 2,3);
 	System.out.println(Arrays.toString(ary));
-	
+		/*	System.out.println(part(ary, 0, 3));
+	System.out.println(Arrays.toString(ary));
+	*/
 	/*	quickselect( ary , 0 );
 	quickselect( ary , 1 ); 
 	quickselect( ary , 2 );  
