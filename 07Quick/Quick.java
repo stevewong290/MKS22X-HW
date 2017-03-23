@@ -15,14 +15,34 @@ public class Quick{
       	int fastplsyea;
 	}*/
 
-    public static void quicksort(int[] data){
-	quicksortH(data, );
+    public static int quicksort(int[] data){
+	return quicksortH(data, 0, data.length - 1);
     }
 
-    public static void quicksortH(int[] data1, int low, int high){
+    public static int quicksortH(int[] data1, int low, int high){
+	int lt = low;
+	int gt = data1.length - 1;
+	int pivotval;
+	int i = lt + 1;
 	Random rand = new Random();
 	int pivotpoint = rand.nextInt(data1.length - 1);
-	
+	pivotval = data1[pivotpoint];
+	swap(data1, pivotpoint, low);
+	while(i < gt){
+	    if(data1[i] == pivotval) {
+		i++;
+	    }
+	    if(data1[i] < pivotval) {
+		swap(data1, i, lt);
+		lt++;
+		i++;
+	    }
+	    if(data1[i] > pivotval){
+		swap(data1, i, gt);
+		gt--;
+	    }
+	}
+	return pivotpoint;
 
     }
     
@@ -76,10 +96,13 @@ public class Quick{
 
     public static void main(String args[]){
 	
-	//	int[]ary = { 2, 10, 15, 23, 0,  5};
-	int[]ary = {0,1,2,3};
+	int[]ary = { 2, 10, 15, 23, 0,  5};
+	//int[]ary = {0,1,2,3};
 	//	swap(ary, 2,3);
 	System.out.println(Arrays.toString(ary));
+	System.out.println(quicksort(ary));
+	System.out.println(Arrays.toString(ary));
+	
 		/*	System.out.println(part(ary, 0, 3));
 	System.out.println(Arrays.toString(ary));
 	*/
