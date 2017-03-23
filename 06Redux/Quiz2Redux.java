@@ -4,7 +4,7 @@ public class Quiz2Redux{
 
     public static ArrayList<String> combinations(String s){
 	ArrayList<String>words = new ArrayList<String>();
-	words.add("");
+		words.add("");
 	help(words, s);
 	Collections.sort(words);
 	return words;
@@ -13,7 +13,7 @@ public class Quiz2Redux{
     private static void help(ArrayList<String> words, String s){
 	int len = words.size();
 	if(s.length() == 0) {
-	    words.add("");
+	    //	    words.add("");
 	}
 	else {
 	    for (int i = 0; i < len; i++){
@@ -26,5 +26,6 @@ public class Quiz2Redux{
     public static void main(String[] args) {
 	System.out.println(combinations("ab"));
 	System.out.println(combinations("abc"));
+	System.out.println(combinations("aa").size());
     }
 }
