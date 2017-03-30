@@ -86,7 +86,37 @@ public class USACO{
 	}
 	return 0;
     }
+	public static int silver(String filename){
+	File text = new File(filename);
+	Scanner data = new Scanner(text);
+	int numrowdepastar = data.nextInt();
+	int numcoldepastar = data.nextInt();
+	int numdetiempo = data.nextInt();
+	int coorxdeempezar = 0;
+	int coorydeempezar = 0;
+	int coorxdeterminar = 0;
+	int coorydeterminar = 0;
+	String lineadenext = "";
+	int[][] pastar = new int[numrowdepastar][numcoldepastar];
+	for(int i = 0; i < numrowdepastar; i++){
+	    lineadenext = data.next();
+	    for(int j = 0; j < numcoldepastar; j++){
+		if (lineadenext.charAt(j) == '.'){
+		    pastar[i][j] = 0;
+		}
+		if (lineadenext.charAt(j) == '*'){
+		    pastar[i][j] = -1;
+		}
+	    }
+	}
+	coorxdeempezar = data.nextInt();
+	coorydeempezar = data.nextInt();
+	coorxdeterminar = data.nextInt();
+	coorydeterminar = data.nextInt();
 	
+	
+		
+    }
     public static void main(String args[]){
 	System.out.println(bronze("testfile1.txt"));
     }
