@@ -86,7 +86,7 @@ public class USACO{
 	}
 	return 0;
     }
-	public static int silver(String filename){
+    /*	public static int silver(String filename){
 	File text = new File(filename);
 	Scanner data = new Scanner(text);
 	int numrowdepastar = data.nextInt();
@@ -112,13 +112,185 @@ public class USACO{
 	coorxdeempezar = data.nextInt();
 	coorydeempezar = data.nextInt();
 	coorxdeterminar = data.nextInt();
-	coorydeterminar = data.nextInt();
-	
-	
+	coorydeterminar = data.nextInt();	
 		
+	}*/
+
+    public static int silver(String filename){
+	try{
+	    File text = new File(filename);
+	    Scanner data = new Scanner(text);
+	    int numrow = data.nextInt();
+	    int numcol = data.nextInt();
+	    int time = data.nextInt();
+	    int[][] pasture = new int[numrow][numcol];
+	    for( int x = 0; x < numrow; x++ ) {
+		String savior = data.next();
+		for ( int y = 0; y < numcol; y++ ) {
+		    if (savior.charAt(y) == '.') {
+			pasture[x][y] = 0;
+		    }
+		    if (savior.charAt(y) == '*') {
+			pasture[x][y] = -1;
+		    }
+		}
+	    }
+	    int rowstart = data.nextInt() - 1;
+	    int colstart = data.nextInt() - 1;
+	    int rowend   = data.nextInt() - 1;
+	    int colend   = data.nextInt() - 1;
+	    pasture[rowstart][colstart] = 1;
+	    int[][] temp = new int[numrow][numcol];
+	    while(time > 0) {
+		for( int x = 0; x < numrow; x++ ) {
+		    for ( int y = 0; y < numcol; y++ ) {
+			if (pasture[x][y] == 0) {
+			    if (x == 0 && y == 0) {
+				if (pasture[x+1][y] == -1){
+				    temp[x][y] = pasture[x][y+1];
+				}
+				else if(pasture[x][y+1] == -1) {
+				    temp[x][y] = pasture[x+1][y];
+				}
+				else {	
+				    temp[x][y] = pasture[x+1][y] + pasture[x][y+1];
+				}
+			    }
+			    else if (x == 0 && y == numcol - 1) {
+				if (pasture[x+1][y] == -1){
+				    temp[x][y] = pasture[x][y-1];
+				}
+				else if(pasture[x][y-1] == -1) {
+				    temp[x][y] = pasture[x+1][y];
+				}
+				else{
+				    temp[x][y] = pasture[x+1][y] + pasture[x][y-1];
+				}
+			    }
+			    else if (x == numrow - 1 && y == 0) {
+				if (pasture[x-1][y] == -1){
+				    temp[x][y] = pasture[x][y+1];
+				}
+				else if(pasture[x][y+1] == -1) {
+				    temp[x][y] = pasture[x-1][y];
+				}
+				else {
+				    temp[x][y] = pasture[x-1][y] + pasture[x][y+1];
+				}
+			    }
+			    else if (x == numrow - 1 && y == numcol - 1) {
+				if (pasture[x-1][y] == -1){
+				    temp[x][y] = pasture[x][y-1];
+				}
+				else if(pasture[x][y-1] == -1) {
+				    temp[x][y] = pasture[x-1][y];
+				}
+				else {
+				    temp[x][y] = pasture[x-1][y] + pasture[x][y-1];
+				}
+			    }
+			    else if (x == 0 && y > 0 && y < numcol - 1) {
+				if(pasture[x+1][y] != -1){
+				    temp[x][y] += pasture[x+1][y];
+				}
+				else if(pasture[x][y+1] != -1) {
+				    temp[x][y] += pasture[x][y+1];
+				}
+				else if(pasture[x][y-1] != -1){
+				    temp[x][y] += pasture[x][y-1];
+				}
+			    }
+			    else if (x == numrow - 1 && y > 0 && y < numcol - 1) {
+				if(pasture[x-1][y] != -1){
+				    temp[x][y] += pasture[x-1][y];
+				}
+				else if(pasture[x][y+1] != -1) {
+				    temp[x][y] += pasture[x][y+1];
+				}
+				else if(pasture[x][y-1] != -1){
+				    temp[x][y] += pasture[x][y-1];
+				}
+				temp[x][y] = pasture[x-1][y] + pasture[x][y+1] + pasture[x][y-1];
+			    }
+			    else if (x > 0 && x < numrow - 1 && y == 0) {
+				if(pasture[x+1][y] != -1){
+				    temp[x][y] += pasture[x+1][y];
+				}
+				else if(pasture[x-1][y] != -1) {
+				    temp[x][y] += pasture[x-1][y];
+				}
+				else if(pasture[x][y+1] != -1){
+				    temp[x][y] += pasture[x][y+1];
+				}
+				temp[x][y] = pasture[x+1][y] + pasture[x-1][y] + pasture[x][y+1];
+			    }
+			    else if (x > 0 && x < numrow - 1 && y == numcol - 1) {
+				if(pasture[x+1][y] != -1){
+				    temp[x][y] += pasture[x+1][y];
+				}
+				else if(pasture[x-1][y] != -1) {
+				    temp[x][y] += pasture[x-1][y];
+				}
+				else if(pasture[x][y-1] != -1){
+				    temp[x][y] += pasture[x][y-1];
+				}
+				temp[x][y] = pasture[x+1][y] + pasture[x-1][y] + pasture[x][y-1];
+			    }
+			    else if(x > 0 && x < numrow - 1 && y < numcol - 1 && y > 0){
+				if(pasture[x+1][y] != -1){
+				    temp[x][y] += pasture[x+1][y];
+				}
+				else if(pasture[x][y+1] != -1) {
+				    temp[x][y] += pasture[x][y+1];
+				}
+				else if(pasture[x][y-1] != -1){
+				    temp[x][y] += pasture[x][y-1];
+				}
+				else if(pasture[x-1][y] != -1) {
+				    temp[x][y] += pasture[x-1][y];
+				    temp[x][y] = pasture[x+1][y] + pasture[x-1][y] + pasture[x][y+1] + pasture[x][y-1];
+				}
+	     
+			    }
+			    else if(pasture[x][y] == -1){
+				temp[x][y] = -1;
+			    }
+			    else {
+				temp[x][y] = 0;
+			    }
+			}
+		    }
+
+		}
+		System.out.println(printary(pasture));
+		pasture = temp;
+		time--;
+	    }
+	    return pasture[rowend][colend];
+	}
+	catch(FileNotFoundException e){
+	}
+		
+	
+
+	return 0;
+
     }
+
+    public static String printary(int[][] ary) {
+	String answer = "";
+	for (int x = 0; x < ary.length; x++) {
+	    answer = answer + "\n";
+	    for (int y = 0; y < ary[0].length; y++) {
+		answer = answer + ary[x][y] + " ";
+	    }
+	}
+	return answer;
+    }
+    
     public static void main(String args[]){
 	System.out.println(bronze("testfile1.txt"));
+	System.out.println(silver("testfile2.txt"));
     }
 
 
