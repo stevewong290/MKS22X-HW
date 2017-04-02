@@ -115,7 +115,42 @@ public class USACO{
 	coorydeterminar = data.nextInt();	
 		
 	}*/
-
+    private static boolean valid(int[][] data, int r, int c){
+	if(r >=0 && r < data.length && c >= 0 && c < data[0].length && data[r][c] == 0) {
+	    return true;
+	}
+	else {
+	    return false;
+	}
+    }
+    
+    private static int movesTo(int[][] data, int row, int col, int time, int startrow, int startcol){
+	if(time == 0) {
+	    if(row == startrow && col == startcol) {
+		return 1;
+	    }
+	    else {
+		return 0;
+	    }
+	}
+	else {
+	    int total = 0;
+	    if(valid(data, row + 1, col)){
+		total += movesTo(data,row + 1, col, time - 1, startrow, startcol);
+	    }
+	    if(valid(data, row - 1, col)){
+		total += movesTo(data,row - 1, col, time - 1, startrow, startcol);
+	    }
+	    if(valid(data, row, col + 1)){
+		total += movesTo(data,row, col + 1, time - 1, startrow, startcol);
+	    }
+	    if(valid(data, row, col - 1)){
+		total += movesTo(data,row, col - 1, time - 1, startrow, startcol);
+	    }
+	    return total;
+	}
+    }
+	
     public static int silver(String filename){
 	try{
 	    File text = new File(filename);
@@ -139,9 +174,44 @@ public class USACO{
 	    int colstart = data.nextInt() - 1;
 	    int rowend   = data.nextInt() - 1;
 	    int colend   = data.nextInt() - 1;
-	    pasture[rowstart][colstart] = 1;
-	    int[][] temp = new int[numrow][numcol];
-	    while(time > 0) {
+
+	    return movesTo(pasture, rowend, colend, time, rowstart, colstart);
+	  
+	}
+	catch(FileNotFoundException e){
+	}
+		
+	
+
+	return 0;
+
+    }
+
+    public static String printary(int[][] ary) {
+	String answer = "";
+	for (int x = 0; x < ary.length; x++) {
+	    answer = answer + "\n";
+	    for (int y = 0; y < ary[0].length; y++) {
+		answer = answer + ary[x][y] + " ";
+	    }
+	}
+	return answer;
+    }
+    
+    public static void main(String args[]){
+	System.out.println(bronze("testfile1.txt"));
+	System.out.println(silver("testfile3.txt"));
+    }
+
+
+
+
+
+}
+
+  //	    pasture[rowstart][colstart] = 1;
+	    // int[][] temp = new int[numrow][numcol];
+	    /*  while(time > 0) {
 		for( int x = 0; x < numrow; x++ ) {
 		    for ( int y = 0; y < numcol; y++ ) {
 			if (pasture[x][y] == 0) {
@@ -254,47 +324,17 @@ public class USACO{
 			    }
 			    else if(pasture[x][y] == -1){
 				temp[x][y] = -1;
-			    }
-			    else {
+				}
+				else {
 				temp[x][y] = 0;
-			    }
-			}
-		    }
+				}
+				}
+				}
 
-		}
-		System.out.println(printary(pasture));
-		pasture = temp;
-		time--;
-	    }
-	    return pasture[rowend][colend];
-	}
-	catch(FileNotFoundException e){
-	}
-		
+				}
+				System.out.println(printary(pasture));
+				pasture = temp;
+				time--;*/
 	
-
-	return 0;
-
-    }
-
-    public static String printary(int[][] ary) {
-	String answer = "";
-	for (int x = 0; x < ary.length; x++) {
-	    answer = answer + "\n";
-	    for (int y = 0; y < ary[0].length; y++) {
-		answer = answer + ary[x][y] + " ";
-	    }
-	}
-	return answer;
-    }
     
-    public static void main(String args[]){
-	System.out.println(bronze("testfile1.txt"));
-	System.out.println(silver("testfile2.txt"));
-    }
-
-
-
-
-
-}
+	    // return pasture[rowend][colend];
