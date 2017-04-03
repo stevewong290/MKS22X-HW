@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Merge{
     public static void mergesort(int[] array){
-	System.out.println(array.length);
+	//	System.out.println(array.length);
 	int[] left  = new int[array.length / 2];
 	int[] right = new int[array.length - array.length / 2];
 	    
