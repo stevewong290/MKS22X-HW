@@ -1,6 +1,27 @@
 public class MyLinkedList{
     LNode start;
     int size;
+
+    public class LNode{
+	int value;
+	LNode start;
+	public LNode(int v, LNode lnode){
+	    value = v;
+	    start = lnode;
+	} 
+	
+	public LNode(){
+	    value = 0;
+	    start = null;
+	}
+	
+    
+    
+    
+    
+    
+    }
+
     public boolean add(int value){
 	
 	
