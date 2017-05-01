@@ -1,0 +1,32 @@
+java.util.*;
+
+public class MyDeque{
+    int head, tail;
+    String[] dequebody;
+    
+    public MyDeque(int initialCapacity){
+	dequebody  = new String[initialCapactiy];
+	// This is for adding the first element 
+	head = -1;
+	tail = 0;
+    }
+
+    public MyDeque(){
+	this(16);
+    }
+
+    //makes stuff more convenient
+    public int size(){
+	return dequebody.length;
+    }
+
+
+
+
+    
+    //makeReal turns my fake array into my real array in respect to the indices
+    private int makeReal(int index){
+	return Math.floorMod( index, dequebody.length ); 
+    }
+
+}
