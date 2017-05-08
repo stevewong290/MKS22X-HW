@@ -48,7 +48,7 @@ public class StackCalc {
 	}
 	return Double.parseDouble(theUSSR.pop());
     }
-
+    
     public static void main(String[] args){
 	System.out.println(eval("10 2.0 +"));
 	System.out.println(eval("11 3 - 4 + 2.5 *"));
