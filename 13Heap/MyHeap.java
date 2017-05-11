@@ -4,59 +4,86 @@ import java.util.*;
 public class MyHeap{
     String[] heap;
     boolean max;
+    int heapsize;
     public MyHeap(){
-	heap  = new String[1];
+	heap  = new String[16];
+	heapsize = 0;
     }
     public MyHeap(boolean b){
 	max = b;
-	heap = new String[1]; 
+	heap = new String[16];
+	heapsize = 0;
     }
 
     public void add(String s){
-	if(max == true){
-
+	if (heapsize == heap.length){
+	    heap = Arrays.copyOf(heap, heap.length*2);
 	}
-	else {
-	    
-	}
+	heap[++heapsize] = s;
+	pushUp(heapsize);
     }
 
     public String remove(){
-	if(max == true){
-	    return "hi";
+	if(heapsize == 0){
+	    throw new NoSuchElementException();
 	}
-	else {
-	    return "hi";
-	}
+	String str = peek();
+	heap[1] = heap[heapsize--];
+	pushDown(1);
+	return str;
     }
 
     public String peek(){
 	return heap[1];
     }
 
-    private String pushUp(int index){
-	if(max == true){
-	    if((heap[index/2].compareTo(heap[index]) > 0)){
-		String temp = heap[index];
-		heap[index] = heap[index/2];
-		heap[index/2] = temp;
-		return pushUp(index/2);
-	    }  
-	    return "working";
+    private void pushUp(int index){
+	if(index == 1){
+	    return;
 	}
-	else{
+	if(max == true){
 	    if((heap[index/2].compareTo(heap[index]) < 0)){
-		String temp = heap[index];
-		heap[index] = heap[index/2];
-		heap[index/2] = temp;
-		return pushUp(index/2);
+		swap(index/2, index);
+		pushUp(index/2);
 	    }  
-	    return "working";   
+	}
+	else {
+	    if((heap[index/2].compareTo(heap[index]) < 0)){
+		swap(index/2, index);
+		pushUp(index/2);
+	    }  
 	}
     }
 
-    private String pushDown(int index){
-	return "hi";
+    private void pushDown(int index){
+	if(index*2 > heapsize){
+	    return;
+	}
+		
+	if(max == true){
+	    if(heap[index*2].compareTo(heap[index*2 + 1]) > 0){
+		if((heap[index].compareTo(heap[index*2]) < 0)){
+		    swap(index*2, index);
+		    pushDown(index*2);
+		}
+	    }
+	    else if(heap[index].compareTo(heap[index*2+1]) < 0){
+		swap(index*2 + 1, index);
+		pushDown(index*2);
+	    }
+	}
+	else{
+	    if(heap[index*2].compareTo(heap[index*2 + 1]) < 0){
+		if((heap[index].compareTo(heap[index*2]) > 0)){
+		    swap(index*2, index);
+		    pushDown(index*2);
+		}
+	    }
+	    else if(heap[index].compareTo(heap[index*2+1]) > 0){
+		swap(index*2 + 1, index);
+		pushDown(index*2);
+	    }
+	}
     }
 
     private void swap(int x, int y){
@@ -65,21 +92,20 @@ public class MyHeap{
 	heap[x] = temp;
     }
     
-    private int length(){
-	return heap.length;
-    }
-    
-    public String toString(){
-	String s = "[";
-	for(int x = 0; x < heap.length; x++){
-	    s += heap[x] + ", ";
-	}
-	return s + "]";
-    }
+
 
     public static void main(String[] args){
 	MyHeap a = new MyHeap();
 	System.out.println(a);
-	System.out.println(a.length);
+	a.add("1");
+	a.add("5");
+	a.add("346");
+	a.add("12345");
+	a.add("4");
+	a.add("235r");
+	a.add("45y73");
+	while (true){
+	    System.out.println(a.remove());
+	}
     }
 }
