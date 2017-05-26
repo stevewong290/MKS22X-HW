@@ -132,16 +132,37 @@ public class wordBank{
 	    if(s.length() == 2){
 		
 	    }
+	    return false;
 	}
     }
 
-    private 
+    public static boolean binarySearch(ArrayList<String> a, String s){
+	int lowerBound = 0;
+	int upperBound = s.size() - 1;
+	if(s.length() < 2 || s.length() > 15){
+	    return false;
+	}
+	else{
+	    if(upperBound - lowerBound == 1){
+		if(s.equals(a.get(lowerBound))){
+		    return true;
+		}
+		else if(s.equals(a.get(upperBound))){
+		    return true;
+		}
+		else{
+		    return false;
+		}
+	    }
+	}
+	
+    } 
     
     public static void main(String[] args){
 	wordBank s = new wordBank("words.txt");
         System.out.println(longestWord(allWords));
 	sort(allWords);
-	/*	System.out.println(two.size());
+	System.out.println(two.size());
 	System.out.println(three.size());
 	System.out.println(four.size());
 	System.out.println(five.size());
@@ -155,10 +176,9 @@ public class wordBank{
 	System.out.println(thirteen.size());
 	System.out.println(fourteen.size());
 	System.out.println(fifteen.size());
-	*/
-	//System.out.println(s);
-	//	System.out.println(listToString(two));
 	
+	//System.out.println(s);
+
     }
     
 }
