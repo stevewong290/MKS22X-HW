@@ -46,6 +46,10 @@ public class wordBank{
 	return y;
     }
 
+    public static boolean checkWord(String s){
+	return search(s);
+    }
+    
     public static String longestWord(ArrayList<String> a){
 	String ans = "";
 	for(int x = a.size() - 1; x >= 0; x--){
@@ -121,25 +125,28 @@ public class wordBank{
 
     /*  public static String listToString(ArrayList<String> a){
         return a.get(0);
-    }
+	}
     */
 
-    public boolean search(String s){
+    public static boolean search(String s){
 	if(s.length() < 2 || s.length() > 15){
 	    return false;
 	}
 	else{
 	    if(s.length() == 2){
-		
+		return binarySearch(two, s, 0, two.size() - 1);
 	    }
 	    return false;
 	}
     }
 
-    public static boolean binarySearch(ArrayList<String> a, String s){
-	int lowerBound = 0;
-	int upperBound = s.size() - 1;
+    public static boolean binarySearch(ArrayList<String> a, String s, int lower, int upper){
+	int lowerBound = lower;
+	int upperBound = upper;
 	if(s.length() < 2 || s.length() > 15){
+	    return false;
+	}
+	else if(lowerBound > upperBound){
 	    return false;
 	}
 	else{
@@ -154,6 +161,24 @@ public class wordBank{
 		    return false;
 		}
 	    }
+	    else{
+		if(s.compareTo(a.get((lowerBound + upperBound) / 2)) > 0){
+		    lowerBound = (((lowerBound + upperBound) / 2));
+		    return binarySearch(a, s, lowerBound, upperBound);
+		}
+		else if(s.compareTo(a.get((lowerBound + upperBound) / 2)) < 0){
+		    upperBound = (((lowerBound + upperBound) / 2));
+		    return binarySearch(a, s, lowerBound, upperBound);
+		}
+		else {
+		    if(s.equals(a.get((lowerBound + upperBound) / 2))){
+			return true;
+		    }
+		    else {
+			return false;
+		    }
+		}
+	    }
 	}
 	
     } 
@@ -163,6 +188,8 @@ public class wordBank{
         System.out.println(longestWord(allWords));
 	sort(allWords);
 	System.out.println(two.size());
+	System.out.println(two.get(0));
+	System.out.println(two);
 	System.out.println(three.size());
 	System.out.println(four.size());
 	System.out.println(five.size());
@@ -176,7 +203,11 @@ public class wordBank{
 	System.out.println(thirteen.size());
 	System.out.println(fourteen.size());
 	System.out.println(fifteen.size());
-	
+	System.out.println(search("A"));
+	System.out.println(search("ED"));
+	System.out.println(search("EG"));
+	System.out.println(checkWord("EG"));
+	System.out.println(checkWord("ED"));
 	//System.out.println(s);
 
     }

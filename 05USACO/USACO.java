@@ -199,8 +199,11 @@ public class USACO{
     }
     
     public static void main(String args[]){
-	System.out.println(bronze("testfile1.txt"));
-	System.out.println(silver("testfile3.txt"));
+	//	System.out.println(bronze("testfile1.txt"));
+	//	System.out.println(silver("testfile3.txt"));
+	//	System.out.println(silver("testfile4.txt"));
+	//	System.out.println(bronze("testfile5.txt"));
+	System.out.println(silver("testfile6.txt"));
     }
 
 
